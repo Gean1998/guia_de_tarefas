@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:guia_de_tarefas/pages/nova_tarefa/modelos/tarefa.dart';
 import 'package:guia_de_tarefas/pages/nova_tarefa/tarefas.dart';
 
 class NovaTarefa extends StatefulWidget {
@@ -89,6 +90,27 @@ class _NovaTarefaState extends State<NovaTarefa> {
                 ),
                 Text(hora.format(context)),
               ],
+            ),
+          ),
+          Container(
+            width: 150,
+            height: 30,
+            child: ElevatedButton(
+              onPressed: () {
+                var tarefa = Tarefa(
+                  titulo: titulo,
+                  descricao: descricao,
+                  data: data,
+                  hora: hora,
+                );
+                tarefas.adicionarTarefa(tarefa);
+              },
+              child: Text('Salvar'),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.resolveWith(
+                  (states) => Colors.purple,
+                ),
+              ),
             ),
           ),
         ],
