@@ -3,17 +3,23 @@ import 'package:guia_de_tarefas/pages/nova_tarefa/modelos/tarefa.dart';
 import 'package:guia_de_tarefas/pages/nova_tarefa/tarefas.dart';
 
 class NovaTarefa extends StatefulWidget {
-  const NovaTarefa({Key? key}) : super(key: key);
+  final Tarefas tarefas;
+
+  const NovaTarefa({
+    Key? key,
+    required this.tarefas,
+  }) : super(key: key);
 
   @override
   State<NovaTarefa> createState() => _NovaTarefaState();
 }
 
 class _NovaTarefaState extends State<NovaTarefa> {
-  var tarefas = Tarefas();
-
   var data = DateTime.now();
   var hora = TimeOfDay.now();
+
+  TextEditingController tituloController = TextEditingController(text: '');
+  TextEditingController descricaoController = TextEditingController(text: '');
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +33,7 @@ class _NovaTarefaState extends State<NovaTarefa> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
+              controller: tituloController,
               decoration: InputDecoration(
                 hintText: 'Digite o título...',
                 label: Text('Título'),
@@ -37,6 +44,7 @@ class _NovaTarefaState extends State<NovaTarefa> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
+              controller: descricaoController,
               decoration: InputDecoration(
                 hintText: 'Digite o descrição...',
                 label: Text('Descrição'),
@@ -65,7 +73,7 @@ class _NovaTarefaState extends State<NovaTarefa> {
                   },
                   icon: Icon(Icons.date_range),
                 ),
-                Text(tarefas.formatadorDeData.format(data)),
+                Text(widget.tarefas.formatadorDeData.format(data)),
               ],
             ),
           ),
@@ -98,12 +106,12 @@ class _NovaTarefaState extends State<NovaTarefa> {
             child: ElevatedButton(
               onPressed: () {
                 var tarefa = Tarefa(
-                  titulo: titulo,
-                  descricao: descricao,
+                  titulo: tituloController.text,
+                  descricao: descricaoController.text,
                   data: data,
                   hora: hora,
                 );
-                tarefas.adicionarTarefa(tarefa);
+                widget.tarefas.adicionarTarefa(tarefa);
               },
               child: Text('Salvar'),
               style: ButtonStyle(

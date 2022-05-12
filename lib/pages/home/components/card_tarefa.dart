@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:guia_de_tarefas/pages/nova_tarefa/modelos/tarefa.dart';
+
+import '../../nova_tarefa/tarefas.dart';
 
 class CardTarefa extends StatelessWidget {
-  const CardTarefa({Key? key}) : super(key: key);
+  final Tarefa tarefa;
+  final Tarefas tarefas;
+
+  const CardTarefa({
+    Key? key,
+    required this.tarefa,
+    required this.tarefas,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +29,11 @@ class CardTarefa extends StatelessWidget {
           children: [
             Align(
               alignment: Alignment.center,
-              child: Text('Titulo'),
+              child: Text(tarefa.titulo ?? ''),
             ),
-            Text('Descrição'),
-            Text('Data'),
-            Text('Hora'),
+            Text('Descrição: ${tarefa.descricao ?? ''}'),
+            Text('Data: ${tarefas.formatadorDeData.format(tarefa.data!)}'),
+            Text('Hora: ${tarefa.hora!.format(context)}'),
           ],
         ),
       ),

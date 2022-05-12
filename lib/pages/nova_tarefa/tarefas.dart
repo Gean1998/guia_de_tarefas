@@ -5,13 +5,13 @@ import 'modelos/tarefa.dart';
 class Tarefas {
   final formatadorDeData = DateFormat('dd/MM/yyyy');
 
-  List<Tarefa> tarefas = [];
+  List<Tarefa> listaDeTarefas = [];
 
   void adicionarTarefa(Tarefa tarefa) {
-    tarefas.add(tarefa);
+    listaDeTarefas.add(tarefa);
   }
 
   void removerTarefa(Tarefa tarefa) {
-    tarefas.remove(tarefa);
+    listaDeTarefas.remove(tarefa);
   }
 }
